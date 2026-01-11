@@ -396,6 +396,14 @@ body.light-theme .logo a:hover {
             gap: 5px;
         }
 
+/* Verified Badge Style */
+.verified-badge {
+    color: #3ba9f4; /* Bright Blue - Visible on both Dark and Light themes */
+    font-size: 13px;
+    margin-left: 6px;
+    vertical-align: middle; /* Aligns perfectly with text */
+}
+
         /* Large Card Override (for "Top Picks") */
         .card.large {
             flex: 0 0 85vw; /* Almost full width on mobile */
