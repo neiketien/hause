@@ -525,13 +525,12 @@ body.light-theme .btn-share {
         let adStartTime = 0;
         let pendingAction = null; // 'play' or 'download'
         let currentRequiredTime = 3000; // Changes based on action
+        let isRedirecting = false; // Flag to track state
 
         // --- ELEMENTS ---
         const overlay = document.getElementById('inPlayerAd');
-        const mainInterface = document.getElementById('adMainInterface');
-        const loadInterface = document.getElementById('adLoadingInterface');
-        const pillText = document.getElementById('adPillText'); // The text inside the pill
-        const loadingText = document.getElementById('loadingText');
+        const pillText = document.getElementById('adPillText'); 
+        const cancelBtn = document.getElementById('playerAdCancel');
 
         // --- FLUID PLAYER INIT ---
         var myFP = fluidPlayer(
@@ -543,7 +542,7 @@ body.light-theme .btn-share {
                     "playButtonShowing": true,
                     "playPauseAnimation": true,
                     "fillToContainer": true, 
-                    "posterImage": "assets/img/hero.gif"
+                    "posterImage": ""
                 }
             }
         );
@@ -553,11 +552,8 @@ body.light-theme .btn-share {
             if (!isUnlocked) {
                 myFP.pause();
                 pendingAction = 'play';
-                currentRequiredTime = 3000; // 3 Seconds
-                
-                // Update Text
+                currentRequiredTime = 3000;
                 pillText.innerText = "Watch AD for 3 seconds to unlock video";
-                
                 showOverlay();
             }
         });
@@ -567,11 +563,8 @@ body.light-theme .btn-share {
             if (!isUnlocked) {
                 e.preventDefault();
                 pendingAction = 'download';
-                currentRequiredTime = 5000; // 5 Seconds
-                
-                // Update Text
+                currentRequiredTime = 5000;
                 pillText.innerText = "Watch ad for 5 seconds to download video";
-                
                 showOverlay();
             } else {
                 startDownload();
@@ -582,25 +575,26 @@ body.light-theme .btn-share {
 
         function showOverlay() {
             overlay.style.display = 'flex';
-            mainInterface.style.display = 'block';
-            loadInterface.style.display = 'none';
+            cancelBtn.style.display = 'block'; // Ensure cancel is visible
+            isRedirecting = false;
         }
 
         // 1. Cancel Click
-        document.getElementById('playerAdCancel').addEventListener('click', () => {
+        cancelBtn.addEventListener('click', () => {
             overlay.style.display = 'none';
             pendingAction = null;
         });
 
         // 2. Unlock Click (The Pill Header)
         document.getElementById('playerAdUnlock').addEventListener('click', () => {
-            // Change Text Immediately
-            pillText.innerText = "Redirecting you to Ad Partner";
+            if (isRedirecting) return; // Prevent double clicks
+            isRedirecting = true;
+
+            // Update Text Directly
+            pillText.innerText = "Redirecting you to Ad Partner...";
             
-            // Switch to Loading State
-            mainInterface.style.display = 'none';
-            loadInterface.style.display = 'flex';
-            loadingText.innerText = "Please wait...";
+            // Hide Cancel button so user commits to the flow
+            cancelBtn.style.display = 'none';
 
             // 1.5 Second Delay before redirect
             setTimeout(() => {
@@ -613,8 +607,8 @@ body.light-theme .btn-share {
 
         // --- VERIFY RETURN ---
         document.addEventListener("visibilitychange", () => {
-            // Only check if overlay is open, loading state is active, and we are visible
-            if (document.visibilityState === "visible" && overlay.style.display === 'flex' && loadInterface.style.display === 'flex') {
+            // Only run logic if we are visible, overlay is open, and we actually started the redirect
+            if (document.visibilityState === "visible" && overlay.style.display === 'flex' && isRedirecting) {
                 
                 if (adStartTime === 0) return;
 
@@ -624,14 +618,15 @@ body.light-theme .btn-share {
                     // SUCCESS
                     handleSuccess();
                 } else {
-                    // FAIL - Return to Main Interface
-                    loadInterface.style.display = 'none';
-                    mainInterface.style.display = 'block';
-                    
+                    // FAIL
+                    isRedirecting = false;
                     const remaining = Math.ceil((currentRequiredTime - elapsed) / 1000);
                     
                     // Update Text to show failure
                     pillText.innerText = `Too early! Watch for ${remaining} more seconds.`;
+                    
+                    // Show Cancel button again
+                    cancelBtn.style.display = 'block';
                     
                     // Reset start time
                     adStartTime = 0;
@@ -674,6 +669,7 @@ body.light-theme .btn-share {
         viewDisplay.innerText = parseInt(currentViews).toLocaleString();
 
     });
-</script>
+    </script>
+    
 </body>
 </html>
