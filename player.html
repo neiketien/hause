@@ -423,16 +423,20 @@ body.light-theme .btn-share {
     
     <!-- === IN-PLAYER AD OVERLAY === -->
     <div id="inPlayerAd" class="player-ad-overlay">
-        <div class="player-ad-content">
-            <button class="ad-pill-header" id="playerAdUnlock">
-                <div class="ad-pill-icon"><i class="fas fa-play"></i></div>
-                <div class="ad-pill-text" id="adPillText">Watch AD for 3 seconds to unlock video</div>
-            </button>
+    <div class="player-ad-content">
+        <!-- The Pill Button -->
+        <button class="ad-pill-header" id="playerAdUnlock">
+            <div class="ad-pill-icon"><i class="fas fa-play"></i></div>
+            <div class="ad-pill-text" id="adPillText">Watch AD for 3 seconds to unlock video</div>
+        </button>
 
-            <div id="adLoadingInterface" class="ad-loading-state">
-                <p class="redirect-text">You'll be redirected back after the ad...</p>
-            </div>
+        <!-- Main Interface (Just the cancel button now) -->
+        <div id="adMainInterface">
+             <div class="ad-btn-row">
+                <button id="playerAdCancel" class="btn-player-cancel">Cancel</button>
+             </div>
         </div>
+    </div>
     </div>
     <!-- === END OVERLAY === -->
 
