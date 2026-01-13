@@ -429,13 +429,6 @@ body.light-theme .btn-share {
             <div class="ad-pill-icon"><i class="fas fa-play"></i></div>
             <div class="ad-pill-text" id="adPillText">Watch AD for 3 seconds to unlock video</div>
         </button>
-
-        <!-- Main Interface (Just the cancel button now) -->
-        <div id="adMainInterface">
-             <div class="ad-btn-row">
-                <button id="playerAdCancel" class="btn-player-cancel">Cancel</button>
-             </div>
-        </div>
     </div>
     </div>
     <!-- === END OVERLAY === -->
@@ -522,7 +515,7 @@ body.light-theme .btn-share {
         
         // --- CONFIG ---
         const AD_URL = "https://ey43.com/4/10246098"; 
-        const VIDEO_SRC = "assets/img/Zeo8WYpFtg8ut45H.mp4";
+        const VIDEO_SRC = "https://cdn.fluidplayer.com/videos/valerian-1080p.mkv";
         
         // --- STATE ---
         let isUnlocked = false;
@@ -534,7 +527,7 @@ body.light-theme .btn-share {
         // --- ELEMENTS ---
         const overlay = document.getElementById('inPlayerAd');
         const pillText = document.getElementById('adPillText'); 
-        const cancelBtn = document.getElementById('playerAdCancel');
+        // No cancel button reference needed
 
         // --- FLUID PLAYER INIT ---
         var myFP = fluidPlayer(
@@ -546,7 +539,7 @@ body.light-theme .btn-share {
                     "playButtonShowing": true,
                     "playPauseAnimation": true,
                     "fillToContainer": true, 
-                    "posterImage": ""
+                    "posterImage": "assets/img/hero.gif"
                 }
             }
         );
@@ -579,26 +572,16 @@ body.light-theme .btn-share {
 
         function showOverlay() {
             overlay.style.display = 'flex';
-            cancelBtn.style.display = 'block'; // Ensure cancel is visible
             isRedirecting = false;
         }
 
-        // 1. Cancel Click
-        cancelBtn.addEventListener('click', () => {
-            overlay.style.display = 'none';
-            pendingAction = null;
-        });
-
-        // 2. Unlock Click (The Pill Header)
+        // Unlock Click (The Pill Header)
         document.getElementById('playerAdUnlock').addEventListener('click', () => {
             if (isRedirecting) return; // Prevent double clicks
             isRedirecting = true;
 
             // Update Text Directly
             pillText.innerText = "Redirecting you to Ad Partner...";
-            
-            // Hide Cancel button so user commits to the flow
-            cancelBtn.style.display = 'none';
 
             // 1.5 Second Delay before redirect
             setTimeout(() => {
@@ -629,10 +612,7 @@ body.light-theme .btn-share {
                     // Update Text to show failure
                     pillText.innerText = `Too early! Watch for ${remaining} more seconds.`;
                     
-                    // Show Cancel button again
-                    cancelBtn.style.display = 'block';
-                    
-                    // Reset start time
+                    // Reset start time so they must click again
                     adStartTime = 0;
                 }
             }
@@ -674,6 +654,5 @@ body.light-theme .btn-share {
 
     });
     </script>
-    
 </body>
 </html>
