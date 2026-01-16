@@ -84,7 +84,7 @@ img {
 }
         
 .logo a {
-    cursor: none;
+    cursor: pointer;
 }
         
 .logo a:hover {
@@ -171,7 +171,7 @@ body.light-theme .logo a:hover {
     color: var(--text-white);
     width: 100%;
     text-align: center;
-    cursor: none;
+    cursor: pointer;
 }
 .mobile-menu a:hover {
     color: var(--primary-pink);
@@ -180,7 +180,7 @@ body.light-theme .logo a:hover {
 .hamburger {
     stroke: var(--icon-stroke);
     color: var(--icon-stroke);
-    cursor: none;
+    cursor: pointer;
     font-size: 24px;
 }
 
@@ -194,7 +194,7 @@ body.light-theme .logo a:hover {
 }
         
 .hero a {
-    cursor: none;
+    cursor: pointer;
 }
 
 .hero img {
@@ -245,7 +245,7 @@ body.light-theme .logo a:hover {
     font-weight: bold;
     border: none;
     border-radius: 4px;
-    cursor: none;
+    cursor: pointer;
     text-transform: uppercase;
     font-size: 14px;
 }
@@ -276,7 +276,7 @@ body.light-theme .logo a:hover {
     font-size: 14px;
     font-weight: 600;
     color: var(--filter-text);
-    cursor: none;
+    cursor: pointer;
     border-right: 1px solid #333;
 }        
 
@@ -317,7 +317,7 @@ body.light-theme .logo a:hover {
 .see-all {
     font-size: 16px;
     color: var(--text-gray);
-    cursor: none;
+    cursor: pointer;
 }
 
 /* Horizontal Scroll Logic */
@@ -344,7 +344,7 @@ body.light-theme .logo a:hover {
     flex: 0 0 280px;
     scroll-snap-align: start;
     position: relative;
-    cursor: none;
+    cursor: pointer;
     transition: transform 0.3s;
 }
 
@@ -390,7 +390,7 @@ body.light-theme .logo a:hover {
     box-shadow: 0 4px 15px rgba(0,0,0,0.6);
     transform: rotate(15deg);
     z-index: 9999;
-    cursor: none;
+    cursor: pointer;
     transition: transform 0.3s ease;
     text-decoration: none;
 }
@@ -440,7 +440,7 @@ body.light-theme .logo a:hover {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    cursor: none;
+    cursor: pointer;
     z-index: 20;
     display: none;
     align-items: center;
@@ -480,7 +480,7 @@ footer {
 
 .social-icons a {   
     color: var(--text-white);
-    cursor: none;
+    cursor: pointer;
 }
         
 .social-icons a:hover {
@@ -563,7 +563,7 @@ body.modal-active > .fixed-watch-btn {
     color: #fff;
     text-decoration: underline;
     font-size: 14px;
-    cursor: none;
+    cursor: pointer;
 }
 
 .cookie-modal {
@@ -592,7 +592,7 @@ body.modal-active > .fixed-watch-btn {
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
-    cursor: none;
+    cursor: pointer;
     border-bottom: none;
 }
 
@@ -668,7 +668,7 @@ body.modal-active > .fixed-watch-btn {
     border-radius: 4px;
     font-weight: bold;
     font-size: 14px;
-    cursor: none;
+    cursor: pointer;
     text-transform: uppercase;
 }
 
@@ -685,7 +685,7 @@ body.modal-active > .fixed-watch-btn {
     border-radius: 4px;
     font-weight: bold;
     font-size: 14px;
-    cursor: none;
+    cursor: pointer;
 }
 
 .btn-gray:hover { 
@@ -707,7 +707,7 @@ body.modal-active > .fixed-watch-btn {
 
 .slider-toggle {
     position: absolute;
-    cursor: none;
+    cursor: pointer;
     top: 0; 
     left: 0; 
     right: 0; 
@@ -912,7 +912,7 @@ video {
     border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
-    cursor: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -946,7 +946,7 @@ video {
     border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
-    cursor: none;
+    cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     position: relative;
@@ -1016,7 +1016,7 @@ body.light-theme .button-content {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-    cursor: none;
+    cursor: pointer;
 }
 
 @keyframes fadeIn {
